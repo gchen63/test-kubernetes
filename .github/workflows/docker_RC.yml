@@ -21,6 +21,9 @@ jobs:
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag rest-api
+
+    - name: Tag Docker image for the push
+      run: docker tag rest-api:latest ${{ secrets.DOCKER_USER }}/rest-api
       
     - name: Push Docker image to DockerHub
       run: docker push ${{ secrets.DOCKER_USER }}/rest-api

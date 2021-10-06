@@ -10,20 +10,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
   
     - name: Login DockerHub
       uses: docker/login-action@v1
       with:
-        username: DOCKER_USER
-        password: DOCKER_PASSWORD
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag rest-api:$(date +%s)
       
     - name: Push Docker image to DockerHub
-      run: docker push DOCKER_USER/my-repository
+      run: docker push ${{ secrets.DOCKER_USER }}/my-repository

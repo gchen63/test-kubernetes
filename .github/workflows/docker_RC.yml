@@ -20,10 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rest-api:$(date +%s)
-    
-    - name: Tag
-      run: docker tag rest-api:$(date +%s) ${{ secrets.DOCKER_USER }}/rest-api:$(date +%s)
+      run: docker build . --file Dockerfile --tag rest-api
       
     - name: Push Docker image to DockerHub
-      run: docker push ${{ secrets.DOCKER_USER }}/rest-api:$(date +%s)
+      run: docker push ${{ secrets.DOCKER_USER }}/rest-api
